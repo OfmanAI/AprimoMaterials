@@ -280,8 +280,10 @@
   --color-warning-rgb: var(--color-orange-500-rgb);
   --color-info-rgb: var(--color-slate-500-rgb);
 }
-/* --- FIX: Moved closing brace from the end of the file to here. --- */
-/* This was the main error causing styles not to load properly.    */
+/* --- PRIMARY FIX FOR BLANK SCREEN --- */
+/* The closing brace above was missing from its correct spot and was at the end of the file. */
+/* This corrected placement ensures ALL the styles below will now load correctly. */
+
 
 /* Base styles */
 html {
@@ -381,17 +383,18 @@ pre code {
 .btn--full-width { width: 100%; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* --- START: Slideshow Core & Animation Styles --- */
+/* END PERPLEXITY DESIGN SYSTEM */
+
+/* --- REVISED SLIDESHOW STYLES (FOR ON-SCREEN VIEWING) --- */
 .slideshow-container {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: var(--color-background);
+  background: linear-gradient(135deg, var(--color-slate-900), var(--color-charcoal-700));
   color: var(--color-text);
   overflow: hidden;
 }
 
-/* 1. Hide all slides by default and set up for animation */
 .slide {
   position: absolute;
   top: 0;
@@ -399,9 +402,9 @@ pre code {
   width: 100%;
   height: 100%;
   opacity: 0;
-  visibility: hidden;
-  transform: translateX(20px);
-  transition: opacity 0.4s var(--ease-standard), transform 0.4s var(--ease-standard), visibility 0.4s var(--ease-standard);
+  visibility: hidden; /* Hide from interactions and screen readers */
+  transform: translateX(20px); /* Start slightly to the right for entry animation */
+  transition: opacity var(--duration-normal) var(--ease-standard), visibility var(--duration-normal) var(--ease-standard), transform var(--duration-normal) var(--ease-standard);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -409,15 +412,12 @@ pre code {
   box-sizing: border-box;
 }
 
-/* 2. Show the active slide */
 .slide.active {
   opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-  z-index: 10;
+  visibility: visible; /* Make it visible and interactive */
+  transform: translateX(0); /* Animate to center */
+  z-index: 10; /* Ensure active slide is on top of any others that might be transitioning out */
 }
-/* --- END: Slideshow Core & Animation Styles --- */
-
 
 /* Navigation Header */
 .nav-header {
@@ -1021,24 +1021,35 @@ pre code {
   outline-offset: 2px;
 }
 
-/* Print styles */
+/* --- NEW PRINT STYLES (FOR HIGH-FIDELITY PDF) --- */
 @media print {
-  .slideshow-container {
-    height: auto;
+  /* Hide interactive elements that shouldn't be in the PDF */
+  .nav-header, .nav-btn {
+    display: none !important;
+  }
+
+  /* Ensure the body and container don't interfere and force colors to print */
+  body, html {
+    background: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   
+  /* Force each slide to be a full, visible page */
   .slide {
-    position: static;
-    opacity: 1;
-    transform: none;
-    page-break-after: always;
-    height: auto;
-    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    position: relative; /* Use relative to flow one after another in print */
+    page-break-after: always; /* This puts each slide on a new page */
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    display: flex !important;
   }
-  
-  .nav-header,
-  .nav-btn {
-    display: none;
+
+  /* Make sure the last slide doesn't create an extra blank page */
+  .slide:last-of-type {
+    page-break-after: auto;
   }
 }
 
