@@ -383,9 +383,227 @@ pre code {
 .btn--full-width { width: 100%; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* END PERPLEXITY DESIGN SYSTEM */
+/* Form elements */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: var(--space-8) var(--space-12);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
 
-/* --- REVISED SLIDESHOW STYLES (FOR ON-SCREEN VIEWING) --- */
+textarea.form-control {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+}
+
+select.form-control {
+  padding: var(--space-8) var(--space-12);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: var(--select-caret-light);
+  background-repeat: no-repeat;
+  background-position: right var(--space-12) center;
+  background-size: 16px;
+  padding-right: var(--space-32);
+}
+
+/* Add a dark mode specific caret */
+@media (prefers-color-scheme: dark) {
+  select.form-control {
+    background-image: var(--select-caret-dark);
+  }
+}
+
+/* Also handle data-color-scheme */
+[data-color-scheme="dark"] select.form-control {
+  background-image: var(--select-caret-dark);
+}
+
+[data-color-scheme="light"] select.form-control {
+  background-image: var(--select-caret-light);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  outline: var(--focus-outline);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-8);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.form-group {
+  margin-bottom: var(--space-16);
+}
+
+/* Card component */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card__body {
+  padding: var(--space-16);
+}
+
+.card__header,
+.card__footer {
+  padding: var(--space-16);
+  border-bottom: 1px solid var(--color-card-border-inner);
+}
+
+/* Status indicators - simplified with CSS variables */
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.status--success {
+  background-color: rgba(
+    var(--color-success-rgb, 33, 128, 141),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-success);
+  border: 1px solid
+    rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));
+}
+
+.status--error {
+  background-color: rgba(
+    var(--color-error-rgb, 192, 21, 47),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-error);
+  border: 1px solid
+    rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));
+}
+
+.status--warning {
+  background-color: rgba(
+    var(--color-warning-rgb, 168, 75, 47),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-warning);
+  border: 1px solid
+    rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));
+}
+
+.status--info {
+  background-color: rgba(
+    var(--color-info-rgb, 98, 108, 113),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-info);
+  border: 1px solid
+    rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
+}
+
+/* Container layout */
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--space-16);
+  padding-left: var(--space-16);
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: var(--container-sm);
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: var(--container-md);
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: var(--container-lg);
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: var(--container-xl);
+  }
+}
+
+/* Utility classes */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-4 { gap: var(--space-4); }
+.gap-8 { gap: var(--space-8); }
+.gap-16 { gap: var(--space-16); }
+.m-0 { margin: 0; }
+.mt-8 { margin-top: var(--space-8); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mx-8 { margin-left: var(--space-8); margin-right: var(--space-8); }
+.my-8 { margin-top: var(--space-8); margin-bottom: var(--space-8); }
+.p-0 { padding: 0; }
+.py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+.px-8 { padding-left: var(--space-8); padding-right: var(--space-8); }
+.py-16 { padding-top: var(--space-16); padding-bottom: var(--space-16); }
+.px-16 { padding-left: var(--space-16); padding-right: var(--space-16); }
+.block { display: block; }
+.hidden { display: none; }
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
+
+/* Dark mode specifics */
+[data-color-scheme="dark"] .btn--outline {
+  border: 1px solid var(--color-border-secondary);
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+
+/* --- SIMPLIFIED SLIDESHOW STYLES --- */
+/* This new, simpler method will solve the blank screen issue. */
 .slideshow-container {
   position: relative;
   width: 100%;
@@ -395,29 +613,22 @@ pre code {
   overflow: hidden;
 }
 
+/* 1. By default, all slides are hidden using display: none. This is the most reliable method. */
 .slide {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: none;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  visibility: hidden; /* Hide from interactions and screen readers */
-  transform: translateX(20px); /* Start slightly to the right for entry animation */
-  transition: opacity var(--duration-normal) var(--ease-standard), visibility var(--duration-normal) var(--ease-standard), transform var(--duration-normal) var(--ease-standard);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: var(--space-24);
   box-sizing: border-box;
 }
 
+/* 2. ONLY the slide with the 'active' class is shown. We use flex to center the content. */
 .slide.active {
-  opacity: 1;
-  visibility: visible; /* Make it visible and interactive */
-  transform: translateX(0); /* Animate to center */
-  z-index: 10; /* Ensure active slide is on top of any others that might be transitioning out */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+/* --- END OF SIMPLIFIED STYLES --- */
 
 /* Navigation Header */
 .nav-header {
@@ -1014,6 +1225,17 @@ pre code {
   }
 }
 
+/* Slide transitions */
+.slide.slide-out {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.slide.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* Focus styles for accessibility */
 .nav-btn:focus-visible,
 .btn:focus-visible {
@@ -1021,35 +1243,25 @@ pre code {
   outline-offset: 2px;
 }
 
-/* --- NEW PRINT STYLES (FOR HIGH-FIDELITY PDF) --- */
+/* Print styles */
 @media print {
-  /* Hide interactive elements that shouldn't be in the PDF */
-  .nav-header, .nav-btn {
-    display: none !important;
-  }
-
-  /* Ensure the body and container don't interfere and force colors to print */
-  body, html {
-    background: none !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+  .slideshow-container {
+    height: auto;
   }
   
-  /* Force each slide to be a full, visible page */
   .slide {
-    height: 100vh;
-    width: 100vw;
-    position: relative; /* Use relative to flow one after another in print */
-    page-break-after: always; /* This puts each slide on a new page */
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-    display: flex !important;
+    position: static;
+    opacity: 1;
+    transform: none;
+    page-break-after: always;
+    height: auto;
+    min-height: 100vh;
+    display: block !important; /* Override the default display for printing */
   }
-
-  /* Make sure the last slide doesn't create an extra blank page */
-  .slide:last-of-type {
-    page-break-after: auto;
+  
+  .nav-header,
+  .nav-btn {
+    display: none;
   }
 }
 
